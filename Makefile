@@ -1,5 +1,5 @@
 .PHONY: all
-all: byte native
+all: byte native result.install
 
 result.ml: which_result.ml
 	cp `ocaml which_result.ml` result.ml
@@ -14,6 +14,13 @@ native: result.ml
 	ocamlopt -c result.ml
 	ocamlopt -a -o result.cmxa result.cmx
 	ocamlopt -shared -linkall -o result.cmxs result.cmxa || true
+
+result.install: result.cma
+	echo -n "lib: [ \"META\"" > result.install
+	for fn in result.*; do \
+	  test "$$fn" != "result.install" && echo -n " \"$$fn\""; \
+	done >> result.install
+	echo " ]" >> result.install
 
 .PHONY: install
 install:
