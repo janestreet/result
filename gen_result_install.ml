@@ -10,6 +10,7 @@ let () =
     | s -> is_prefix s ~prefix:"result."
   in
   let to_install =
+    let ( |> ) x f = f x in
     Sys.readdir "."
     |> Array.to_list
     |> List.filter install_it
