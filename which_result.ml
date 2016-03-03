@@ -8,4 +8,4 @@ let () =
     else
       "result-as-alias.ml"
   in
-  print_endline file
+  print_string file
