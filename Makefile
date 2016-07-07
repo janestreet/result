@@ -5,7 +5,7 @@ result.ml: which_result.ml
 	cp `ocaml which_result.ml` result.ml
 
 .PHONY: byte
-byte: result.ml
+byte result.cma: result.ml
 	ocamlc -c result.ml
 	ocamlc -a -o result.cma result.cmo
 
