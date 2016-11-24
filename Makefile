@@ -6,14 +6,14 @@ result.ml: which_result.ml
 
 .PHONY: byte
 byte: result.ml
-	ocamlc -c result.ml
-	ocamlc -a -o result.cma result.cmo
+	ocamlfind ocamlc -c result.ml
+	ocamlfind ocamlc -a -o result.cma result.cmo
 
 .PHONY: native
 native: result.ml
-	ocamlopt -c result.ml
-	ocamlopt -a -o result.cmxa result.cmx
-	ocamlopt -shared -linkall -o result.cmxs result.cmxa || true
+	ocamlfind ocamlopt -c result.ml
+	ocamlfind ocamlopt -a -o result.cmxa result.cmx
+	ocamlfind ocamlopt -shared -linkall -o result.cmxs result.cmxa || true
 
 result.install: result.cma gen_result_install.ml
 	ocaml gen_result_install.ml
