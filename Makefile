@@ -1,32 +1,17 @@
-.PHONY: all
-all: byte native result.install
+INSTALL_ARGS := $(if $(PREFIX),--prefix $(PREFIX),)
 
-result.ml: which_result.ml
-	cp `ocaml which_result.ml` result.ml
+default:
+	jbuilder build @install
 
-.PHONY: byte
-byte: result.ml
-	ocamlfind ocamlc -c result.ml
-	ocamlfind ocamlc -a -o result.cma result.cmo
-
-.PHONY: native
-native: result.ml
-	ocamlfind ocamlopt -c result.ml
-	ocamlfind ocamlopt -a -o result.cmxa result.cmx
-	ocamlfind ocamlopt -shared -linkall -o result.cmxs result.cmxa || true
-
-result.install: result.cma gen_result_install.ml
-	ocaml gen_result_install.ml
-
-.PHONY: install
 install:
-	ocamlfind remove result 2> /dev/null || true
-	ocamlfind install result META result.*
+	jbuilder install $(INSTALL_ARGS)
 
-.PHONY: uninstall
 uninstall:
-	ocamlfind remove result
+	jbuilder uninstall $(INSTALL_ARGS)
 
-.PHONY: clean
+reinstall: uninstall reinstall
+
 clean:
-	rm -f result.*
+	rm -rf _build
+
+.PHONY: default install uninstall reinstall clean

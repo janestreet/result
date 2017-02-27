@@ -1,0 +1,17 @@
+opam-version: "1.2"
+version: "1.2"
+maintainer: "opensource@janestreet.com"
+authors: ["Jane Street Group, LLC <opensource@janestreet.com>"]
+homepage: "https://github.com/janestreet/result"
+dev-repo: "https://github.com/janestreet/result.git"
+bug-reports: "https://github.com/janestreet/result/issues"
+license: "BSD3"
+build: [["jbuilder" "build-package" "result" "-j" jobs]]
+depends: ["jbuilder"]
+descr: "
+Compatibility Result module
+
+Projects that want to use the new result type defined in OCaml >= 4.03
+while staying compatible with older version of OCaml should use the
+Result module defined in this library.
+"
