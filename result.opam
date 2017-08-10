@@ -6,8 +6,8 @@ homepage: "https://github.com/janestreet/result"
 dev-repo: "https://github.com/janestreet/result.git"
 bug-reports: "https://github.com/janestreet/result/issues"
 license: "BSD3"
-build: [["jbuilder" "build-package" "result" "-j" jobs]]
-depends: ["jbuilder"]
+build: [["jbuilder" "build" -p name "-j" jobs]]
+depends: ["jbuilder" {>= "1.0+beta11"}]
 descr: "
 Compatibility Result module
 
