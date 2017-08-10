@@ -12,6 +12,9 @@ uninstall:
 reinstall: uninstall reinstall
 
 clean:
-	rm -rf _build
+	jbuilder clear
 
-.PHONY: default install uninstall reinstall clean
+all-supported-ocaml-versions:
+	jbuilder build --workspace jbuild-workspace.dev
+
+.PHONY: default install uninstall reinstall clean all-supported-ocaml-versions
