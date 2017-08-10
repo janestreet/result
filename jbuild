@@ -1,16 +1,3 @@
-(* -*- tuareg -*- *)
-
-module J = Jbuild_plugin.V1
-
-let () =
-  let source =
-    if Scanf.sscanf J.ocaml_version "%u.%u" (fun a b -> a, b)
-       < (4, 03) then
-      "result-as-newtype.ml"
-    else
-      "result-as-alias.ml"
-  in
-  Printf.ksprintf J.send {|
 (jbuild_version 1)
 
 (library
@@ -19,8 +6,7 @@ let () =
   (modules (result))))
 
 (rule
- ((targets (result.ml))
-  (deps    (%s))
-  (action  (copy-and-add-line-directive ${<} ${@}))))
-|}
-    source
+ (with-stdout-to selected
+  (run ${OCAML} ${path:which_result.ml} ${ocaml_version})))
+
+(rule (copy# ${read:selected} result.ml))

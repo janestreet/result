@@ -12,7 +12,7 @@ uninstall:
 reinstall: uninstall reinstall
 
 clean:
-	jbuilder clear
+	jbuilder clean
 
 all-supported-ocaml-versions:
 	jbuilder build --workspace jbuild-workspace.dev
