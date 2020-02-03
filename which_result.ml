@@ -6,6 +6,9 @@ let () =
     if version < (4, 03) then
       "result-as-newtype.ml"
     else
-      "result-as-alias.ml"
+      if version < (4, 08) then
+        "result-as-alias.ml"
+      else
+        "result-as-alias-4.08.ml"
   in
   print_string file
